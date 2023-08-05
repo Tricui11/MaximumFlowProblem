@@ -2,6 +2,8 @@
 #define DIALOG_H
 
 #include <QDialog>
+#include <QRegularExpressionValidator>
+#include <graphs.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -15,10 +17,23 @@ public:
     Dialog(QWidget *parent = nullptr);
     ~Dialog();
 
+protected:
+    // Определяем виртуальный метод родительского класса
+     // для отрисовки содержимого виджета
+     //
+    void paintEvent(QPaintEvent *event);
+
 private slots:
-    void on_pushButton_clicked();
+    Graph getGraph();
+
+    void on_pushButton_draw_vertices_clicked();
+
+    void on_pushButton_add_clicked();
+
+    void on_pushButton_FindFlow_clicked();
 
 private:
     Ui::Dialog *ui;
+    QValidator *cellValidator;
 };
 #endif // DIALOG_H
