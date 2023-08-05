@@ -18,7 +18,6 @@ SOURCES += \
 
 HEADERS += \
     dialog.h \
-    graphs.h \
     queue.h
 
 FORMS += \

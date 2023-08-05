@@ -26,11 +26,11 @@ Dialog::~Dialog()
 
 int matrix[12][12];
 int temp[12][12];
-Graph graph10(10);
+FlowGraph graph10(10);
 
 QString symbol[12] ={"A", "B","C", "D", "E", "F", "G", "H", "I", "J", "K", "L"};
 
-Graph Dialog::getGraph()
+FlowGraph Dialog::getGraph()
 {
     return graph10;
 }
@@ -42,7 +42,7 @@ void Dialog::paintEvent(QPaintEvent *event)
     // Устанавливаем кисть абриса
     painter.setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap));
 
-    Graph graph = getGraph();
+    FlowGraph graph = getGraph();
     painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
     painter.setFont(QFont("times", 22));
     for (int i = 0; i < graph.capacity; ++i)
@@ -62,7 +62,7 @@ void Dialog::on_pushButton_draw_vertices_clicked()
 
 void Dialog::on_pushButton_add_clicked()
 {
-    Graph graph = getGraph();
+    FlowGraph graph = getGraph();
     QString str_vertex1 = ui->lineEdit_vertex1->text();
     QString str_vertex2 = ui->lineEdit_vertex_2->text();
     QString str_weight = ui->lineEdit_weight->text();
@@ -123,7 +123,7 @@ void Dialog::on_pushButton_FindFlow_clicked()
 
 
 
-    Graph graph = getGraph();
+    FlowGraph graph = getGraph();
     int checkLines = 0;
     for (int i = 0; i < graph.capacity; ++i){
         for (int j = 0; j < graph.capacity; ++j) {

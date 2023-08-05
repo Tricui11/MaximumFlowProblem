@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QRegularExpressionValidator>
-#include <graphs.h>
+#include <flowgraph.cpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -24,7 +24,7 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 private slots:
-    Graph getGraph();
+    FlowGraph getGraph();
 
     void on_pushButton_draw_vertices_clicked();
 
