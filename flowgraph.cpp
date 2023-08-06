@@ -11,6 +11,8 @@ struct FlowGraph
     int degree[MAXV+1];
     int nvertices;
     int nedges;
+    int r = 50;
+    EdgeNode vertexCoord[MAXV];
 
     FlowGraph(int nvertices)
     {
@@ -22,45 +24,34 @@ struct FlowGraph
         }
     }
 
-
     void GetCoordsArray()
     {
         double h = 375;
         double k = 200;
         double a = 325;
         double b = 175;
-
         double angleIncrement = 2 * M_PI / nvertices;
         double currentAngle = 0;
-
-        std::vector<double> coords;
-
-        // Первая точка V1 на большой полуоси
         double x = h - a;
         double y = k;
 
+        std::vector<double> coords;
         coords.push_back(x);
         coords.push_back(y);
-
-        for (int i = 1; i < nvertices; ++i) {
+        for (int i = 1; i < nvertices; ++i)
+        {
             currentAngle += angleIncrement;
-
             x = h - a * cos(currentAngle);
             y = k - b * sin(currentAngle);
-
             coords.push_back(x);
             coords.push_back(y);
         }
-
         for (int i = 0, j = 0; i < nvertices * 2; ++i, ++j)
         {
             vertexCoord[i].x = coords[j++];
             vertexCoord[i].y = coords[j];
         }
     }
-
-    int r = 50;
-    EdgeNode vertexCoord[MAXV];
 };
 
 #endif

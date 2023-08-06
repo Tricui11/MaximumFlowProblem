@@ -17,11 +17,6 @@ public:
     Dialog(QWidget *parent = nullptr);
     ~Dialog();
 
-
-    void DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end);
-
-
-
 protected:
     void paintEvent(QPaintEvent *event);
 
@@ -35,6 +30,8 @@ private slots:
 private:
     Ui::Dialog *ui;
     QValidator *cellValidator;
+
+    void DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end);
 
     void print_result();
 };

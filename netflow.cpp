@@ -19,7 +19,6 @@ public:
         p->flow = 0;
         p->residual = w;
         p->next = g->edges[x];
-
         g->edges[x] = p;
         g->degree[x]++;
 
@@ -92,12 +91,6 @@ public:
         enqueue(&q,start);
         discovered[start] = true;
 
-
-
-
-
-
-
         while (q.count > 0)
         {
             v = dequeue(&q);
@@ -125,51 +118,38 @@ public:
 
     int path_volume(FlowGraph *g, int start, int end, int parents[])
     {
-        EdgeNode *e;
-
         if (parents[end] == -1) return(0);
 
-        e = find_edge(g,parents[end],end);
-
-        if (start == parents[end])
-            return(e->residual);
-        else
-            return(std::min(path_volume(g,start,parents[end],parents), e->residual) );
+        EdgeNode *e = find_edge(g,parents[end],end);
+        if (start == parents[end]) return(e->residual);
+        else return(std::min(path_volume(g,start,parents[end],parents), e->residual));
     }
 
     void augment_path(FlowGraph *g, int start, int end, int parents[], int volume)
     {
-        EdgeNode *e;
-
         if (start == end) return;
 
-        e = find_edge(g,parents[end],end);
+        EdgeNode *e = find_edge(g, parents[end], end);
         e->flow += volume;
         e->residual -= volume;
-
-        e = find_edge(g,end,parents[end]);
+        e = find_edge(g, end, parents[end]);
         e->residual += volume;
 
-        augment_path(g,start,parents[end],parents,volume);
+        augment_path(g, start, parents[end], parents, volume);
     }
 
-    void netflow(FlowGraph *g, int source, int sink)
+    void netflow(FlowGraph *g, int source, int target)
     {
-        int volume;
-
         add_residual_edges(g);
-
         initialize_search(g);
         bfs(g, source);
-
-        volume = path_volume(g, source, sink, parent);
-
+        int volume = path_volume(g, source, target, parent);
         while (volume > 0)
         {
-            augment_path(g, source, sink, parent, volume);
+            augment_path(g, source, target, parent, volume);
             initialize_search(g);
             bfs(g, source);
-            volume = path_volume(g, source, sink, parent);
+            volume = path_volume(g, source, target, parent);
         }
     }
 };

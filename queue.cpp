@@ -38,15 +38,3 @@ int dequeue(Queue *q)
 
     return(x);
 }
-
-void print_queue(Queue *q)
-{
-    int i = q->first;
-    while (i != q->last)
-    {
-        printf("%c ",q->q[i]);
-        i = (i+1) % QUEUESIZE;
-    }
-    printf("%2d ",q->q[i]);
-    printf("\n");
-}

@@ -66,28 +66,23 @@ void Dialog::paintEvent(QPaintEvent *event)
 
 void Dialog::DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end)
 {
-  qreal arrowSize = 20;
-  painter.setBrush(Qt::black);
-
-  QLineF line(end, start);
-  double angle = std::atan2(-line.dy(), line.dx());
-  QPoint vector = end - start;
-  double length = sqrt(vector.x() * vector.x() + vector.y() * vector.y());
-  double s1 = graph.r/2*((double)vector.x()) / length;
-  double s2 = graph.r/2*((double)vector.y()) / length;
-
-  QPoint sd(s1, s2);
-  QPoint endpoint = end - sd;
-  QPointF arrowP1 = endpoint + QPointF(sin(angle + M_PI / 3) * arrowSize,
-                                        cos(angle + M_PI / 3) * arrowSize);
-  QPointF arrowP2 = endpoint + QPointF(sin(angle + M_PI - M_PI / 3) * arrowSize,
-                                        cos(angle + M_PI - M_PI / 3) * arrowSize);
-
-  QPolygonF arrowHead;
-  arrowHead.clear();
-  arrowHead << endpoint << arrowP1 << arrowP2;
-  painter.drawLine(endpoint, start);
-  painter.drawPolygon(arrowHead);
+    qreal arrowSize = 20;
+    painter.setBrush(Qt::black);
+    QLineF line(end, start);
+    double angle = std::atan2(-line.dy(), line.dx());
+    QPoint vector = end - start;
+    double length = sqrt(vector.x() * vector.x() + vector.y() * vector.y());
+    double xOffset = graph.r/2*((double)vector.x()) / length;
+    double yOffset = graph.r/2*((double)vector.y()) / length;
+    QPoint offset(xOffset, yOffset);
+    QPoint endpoint = end - offset;
+    QPointF arrowP1 = endpoint + QPointF(sin(angle + M_PI / 3) * arrowSize, cos(angle + M_PI / 3) * arrowSize);
+    QPointF arrowP2 = endpoint + QPointF(sin(angle + M_PI - M_PI / 3) * arrowSize, cos(angle + M_PI - M_PI / 3) * arrowSize);
+    QPolygonF arrowHead;
+    arrowHead.clear();
+    arrowHead << endpoint << arrowP1 << arrowP2;
+    painter.drawLine(endpoint, start);
+    painter.drawPolygon(arrowHead);
 }
 
 void Dialog::on_pushButton_draw_vertices_clicked()
@@ -135,8 +130,6 @@ void Dialog::on_pushButton_add_clicked()
         graph.nedges++;
         netflow->insert_flow_edge(&graph, vertex1+1, vertex2+1, true, weight);
 
-
-
         QString leText = ui->plainTextEdit_reslut->toPlainText();
         leText.append("Edge: (%1, %2), weight:%3");
         leText = leText.arg(vertex1+1).arg(vertex2+1).arg(weight);
@@ -158,8 +151,6 @@ void Dialog::print_result()
     int i;
     EdgeNode *p;
     QString result;
-
-
     for (i=1; i<=graph.nvertices; i++)
     {
         p = graph.edges[i];
@@ -179,7 +170,6 @@ void Dialog::print_result()
             }
         }
     }
-
     int flow = 0;
     p = graph.edges[1];
     while (p != NULL)
