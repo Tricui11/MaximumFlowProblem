@@ -1,0 +1,15 @@
+[Project]
+VersionControlSupport=kdevgit
+
+[QMake_Builder]
+Build_Folder=/home/furer/Programming/Projects/MaximumFlowProblem/build
+Build_Type=0
+Extra_Arguments=
+Install_Prefix=
+QMake_Binary=/usr/lib64/qt5/bin/qmake
+
+[QMake_Builder][/home/furer/Programming/Projects/MaximumFlowProblem/build]
+Build_Type=0
+Extra_Arguments=
+Install_Prefix=
+QMake_Binary=/usr/lib64/qt5/bin/qmake

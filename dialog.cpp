@@ -1,6 +1,7 @@
 #include <dialog.h>
 #include <ui_dialog.h>
 #include <QMessageBox>
+#include <cmath>
 #include <QPainter>
 #include <QRegularExpression>
 #include <netflow.cpp>
@@ -71,7 +72,7 @@ void Dialog::DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end)
   QLineF line(end, start);
   double angle = std::atan2(-line.dy(), line.dx());
   QPoint vector = end - start;
-  double length = qSqrt(vector.x() * vector.x() + vector.y() * vector.y());
+  double length = sqrt(vector.x() * vector.x() + vector.y() * vector.y());
   double s1 = graph.r/2*((double)vector.x()) / length;
   double s2 = graph.r/2*((double)vector.y()) / length;
 
