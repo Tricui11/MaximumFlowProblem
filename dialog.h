@@ -17,15 +17,15 @@ public:
     Dialog(QWidget *parent = nullptr);
     ~Dialog();
 
+
+    void DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end);
+
+
+
 protected:
-    // Определяем виртуальный метод родительского класса
-     // для отрисовки содержимого виджета
-     //
     void paintEvent(QPaintEvent *event);
 
 private slots:
-    FlowGraph getGraph();
-
     void on_pushButton_draw_vertices_clicked();
 
     void on_pushButton_add_clicked();
@@ -35,5 +35,7 @@ private slots:
 private:
     Ui::Dialog *ui;
     QValidator *cellValidator;
+
+    void print_result();
 };
 #endif // DIALOG_H

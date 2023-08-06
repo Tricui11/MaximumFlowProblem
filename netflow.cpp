@@ -10,93 +10,6 @@ public:
     bool discovered[MAXV+1];
     int parent[MAXV+1];
 
-    void initialize_graph(FlowGraph *g)
-    {
-        int i;
-
-        g -> nvertices = 0;
-        g -> nedges = 0;
-
-        for (i=0; i<MAXV; i++) g->degree[i] = 0;
-        for (i=0; i<MAXV; i++) g->edges[i] = NULL;
-    }
-
-    void read_flow_graph(FlowGraph *g, bool directed)
-    {
-        int i;				/* counter */
-        int m;				/* number of edges */
-        int x,y,w;			/* placeholder for edge and weight */
-
-        initialize_graph(g);
-
-
-
-        g->nvertices = 8;
-        m = 13;
-
-        for (i=1; i<=m; i++)
-        {
-            if (i == 1)
-            {
-                x = 1; y = 2; w = 6;
-            }
-            else if (i == 2)
-            {
-                x = 1; y = 3; w = 6;
-            }
-            else if (i == 3)
-            {
-                x = 3; y = 2; w = 5;
-            }
-            else if (i == 4)
-            {
-                x = 2; y = 4; w = 4;
-            }
-            else if (i == 5)
-            {
-                x = 2; y = 5; w = 2;
-            }
-            else if (i == 6)
-            {
-                x = 3; y = 5; w = 9;
-            }
-            else if (i == 7)
-            {
-                x = 5; y = 4; w = 8;
-            }
-            else if (i == 8)
-            {
-                x = 5; y = 7; w = 7;
-            }
-            else if (i == 9)
-            {
-                x = 4; y = 7; w = 2;
-            }
-            else if (i == 10)
-            {
-                x = 4; y = 6; w = 4;
-            }
-            else if (i == 11)
-            {
-                x = 7; y = 6; w = 11;
-            }
-            else if (i == 12)
-            {
-                x = 6; y = 8; w = 7;
-            }
-            else if (i == 13)
-            {
-                x = 7; y = 8; w = 4;
-            }
-
-
-
-
-
-            insert_flow_edge(g, x, y, directed, w);
-        }
-    }
-
     void insert_flow_edge(FlowGraph *g, int x, int y, bool directed, int w)
     {
         EdgeNode *p;
@@ -155,24 +68,6 @@ public:
                 }
                 p = p->next;
             }
-        }
-    }
-
-    void print_flow_graph(FlowGraph *g)
-    {
-        int i;
-        EdgeNode *p;
-
-        for (i=1; i<=g->nvertices; i++)
-        {
-            printf("%d: ",i);
-            p = g->edges[i];
-            while (p != NULL)
-            {
-                printf(" %d(%d,%d)",p->v, p->capacity, p->flow);
-                p = p->next;
-            }
-            printf("\n");
         }
     }
 

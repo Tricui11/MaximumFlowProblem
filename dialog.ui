@@ -7,28 +7,28 @@
     <x>0</x>
     <y>0</y>
     <width>760</width>
-    <height>600</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>750</width>
-    <height>600</height>
+    <width>760</width>
+    <height>700</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>760</width>
-    <height>600</height>
+    <height>700</height>
    </size>
   </property>
   <widget class="QPushButton" name="pushButton_FindFlow">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>470</y>
+     <y>420</y>
      <width>251</width>
-     <height>61</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -46,11 +46,11 @@
     <string>Find Maximum Flow</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>520</y>
+     <y>490</y>
      <width>410</width>
      <height>33</height>
     </rect>
@@ -101,7 +101,7 @@
        </font>
       </property>
       <property name="text">
-       <string>A</string>
+       <string>1</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -128,7 +128,7 @@
        </font>
       </property>
       <property name="text">
-       <string>B</string>
+       <string>2</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -213,11 +213,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>370</x>
-     <y>451</y>
+     <y>421</y>
      <width>371</width>
      <height>33</height>
     </rect>
@@ -250,15 +250,6 @@
     </item>
     <item>
      <widget class="QLineEdit" name="lineEdit_number_of_vertices">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
       <property name="minimumSize">
        <size>
         <width>25</width>
@@ -310,18 +301,25 @@
     </item>
    </layout>
   </widget>
-  <zorder>label_Edge</zorder>
+  <widget class="QPlainTextEdit" name="plainTextEdit_reslut">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>490</y>
+     <width>251</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+  </widget>
+  <zorder>layoutWidget</zorder>
   <zorder>pushButton_FindFlow</zorder>
-  <zorder>lineEdit_vertex1</zorder>
-  <zorder>lineEdit_vertex_2</zorder>
-  <zorder>label_Weight</zorder>
-  <zorder>lineEdit_weight</zorder>
-  <zorder>pushButton_add</zorder>
-  <zorder>label_number_of_vertices</zorder>
-  <zorder>lineEdit_number_of_vertices</zorder>
-  <zorder>pushButton_draw_vertices</zorder>
-  <zorder>pushButton_FindFlow</zorder>
-  <zorder></zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>plainTextEdit_reslut</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
