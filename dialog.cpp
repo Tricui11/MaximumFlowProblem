@@ -141,17 +141,17 @@ void Dialog::on_pushButton_add_clicked()
 
 void Dialog::on_pushButton_FindFlow_clicked()
 {
-    int source = 1, target = graph.nvertices/2 +1;
+    int source, target;
+    graph.FindSourceAndTarget(source, target);
     netflow->netflow(&graph, source, target);
     print_result();
 }
 
 void Dialog::print_result()
 {
-    int i;
     EdgeNode *p;
     QString result;
-    for (i=1; i<=graph.nvertices; i++)
+    for (int i=1; i<=graph.nvertices; i++)
     {
         p = graph.edges[i];
         while (p != NULL)

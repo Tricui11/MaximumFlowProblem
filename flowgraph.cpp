@@ -3,6 +3,7 @@
 #include <edgenode.cpp>
 #include <cmath>
 #include <vector>
+#include <QSet>
 #define	MAXV 100
 
 struct FlowGraph
@@ -51,6 +52,32 @@ struct FlowGraph
             vertexCoord[i].x = coords[j++];
             vertexCoord[i].y = coords[j];
         }
+    }
+
+    void FindSourceAndTarget(int &source, int &target)
+    {
+        QSet<int> sourceSet;
+        for (int i=1; i<=nvertices; i++)
+        {
+            sourceSet.insert(i);
+        }
+        EdgeNode *p;
+        for (int i=1; i<=nvertices; i++)
+        {
+            p = edges[i];
+            bool isTarget = true;
+            while (p != NULL)
+            {
+                isTarget = false;
+                sourceSet.remove(p->v);
+                p = p->next;
+            }
+            if (isTarget)
+            {
+                target = i;
+            }
+        }
+        source = *(sourceSet.begin());
     }
 };
 
