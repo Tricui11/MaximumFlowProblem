@@ -11,17 +11,30 @@ struct FlowGraph
     EdgeNode *edges[MAXV+1];
     int degree[MAXV+1];
     int nvertices;
+    int* level;
     int nedges;
     int r = 50;
     EdgeNode vertexCoord[MAXV];
 
-    FlowGraph(int nvertices)
+    FlowGraph(int nvertices, bool isLayered)
     {
         this->nvertices = nvertices;
-        for (int i=0; i<MAXV; i++)
+        if (!isLayered)
         {
-            this->degree[i] = 0;
-            this->edges[i] = NULL;
+            for (int i=0; i<MAXV; i++)
+            {
+                degree[i] = 0;
+                edges[i] = NULL;
+            }
+        }
+        else
+        {
+            level = new int[nvertices];
+            for (int i = 0; i <= nvertices; ++i)
+            {
+                edges[i] = new EdgeNode[MAXV + 1];
+                degree[i] = 0;
+            }
         }
     }
 

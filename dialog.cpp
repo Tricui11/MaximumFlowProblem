@@ -4,7 +4,9 @@
 #include <cmath>
 #include <QPainter>
 #include <QRegularExpression>
-#include <netflow.cpp>
+#include <edmondskarpnetflow.cpp>
+#include <iostream>
+#include <dinicnetflow.cpp>
 
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
@@ -26,8 +28,8 @@ Dialog::~Dialog()
 }
 
 int matrix[MAXV][MAXV];
-FlowGraph graph(MAXV);
-Netflow *netflow = new Netflow();
+FlowGraph graph(MAXV, false);
+EdmondsKarpNetflow *netflow = new EdmondsKarpNetflow();
 
 FlowGraph getGraph()
 {
@@ -87,6 +89,137 @@ void Dialog::DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end)
 
 void Dialog::on_pushButton_draw_vertices_clicked()
 {
+
+
+
+
+    //Graph g(8);
+ //nf->insert_flow_edge(&g, 0, 1, 6);
+ //nf->insert_flow_edge(&g, 0, 2, 6);
+ //nf->insert_flow_edge(&g, 2, 1, 5);
+ //nf->insert_flow_edge(&g, 2, 4, 9);
+ //nf->insert_flow_edge(&g, 1, 3, 4);
+ //nf->insert_flow_edge(&g, 1, 4, 2);
+ //nf->insert_flow_edge(&g, 4, 3, 8);
+ //nf->insert_flow_edge(&g, 4, 6, 7);
+ //nf->insert_flow_edge(&g, 3, 6, 2);
+ //nf->insert_flow_edge(&g, 3, 5, 4);
+ //nf->insert_flow_edge(&g, 6, 5, 11);
+ //nf->insert_flow_edge(&g, 6, 7, 4);
+ //nf->insert_flow_edge(&g, 5, 7, 7);
+
+     FlowGraph g(14, true);
+     DinicNetflow *nf = new DinicNetflow();
+     nf->insert_flow_edge(&g, 0, 1, true, 6);
+     nf->insert_flow_edge(&g, 1, 0, true, 0);
+
+     nf->insert_flow_edge(&g, 0, 2, true, 6);
+     nf->insert_flow_edge(&g, 2, 0, true, 0);
+
+     nf->insert_flow_edge(&g, 0, 3, true, 8);
+     nf->insert_flow_edge(&g, 3, 0, true, 0);
+
+     nf->insert_flow_edge(&g, 0, 4, true, 9);
+     nf->insert_flow_edge(&g, 4, 0, true, 0);
+
+     nf->insert_flow_edge(&g, 1, 5, true, 4);
+     nf->insert_flow_edge(&g, 5, 1, true, 0);
+
+     nf->insert_flow_edge(&g, 1, 2, true, 3);
+     nf->insert_flow_edge(&g, 2, 1, true, 0);
+
+     nf->insert_flow_edge(&g, 2, 6, true, 4);
+     nf->insert_flow_edge(&g, 6, 2, true, 0);
+
+     nf->insert_flow_edge(&g, 2, 3, true, 4);
+     nf->insert_flow_edge(&g, 3, 2, true, 0);
+
+     nf->insert_flow_edge(&g, 3, 7, true, 5);
+     nf->insert_flow_edge(&g, 7, 3, true, 0);
+
+     nf->insert_flow_edge(&g, 3, 8, true, 10);
+     nf->insert_flow_edge(&g, 8, 3, true, 0);
+
+     nf->insert_flow_edge(&g, 3, 4, true, 3);
+     nf->insert_flow_edge(&g, 4, 3, true, 0);
+
+     nf->insert_flow_edge(&g, 4, 8, true, 6);
+     nf->insert_flow_edge(&g, 8, 4, true, 0);
+
+     nf->insert_flow_edge(&g, 5, 9, true, 5);
+     nf->insert_flow_edge(&g, 9, 5, true, 0);
+
+     nf->insert_flow_edge(&g, 5, 2, true, 9);
+     nf->insert_flow_edge(&g, 2, 5, true, 0);
+
+     nf->insert_flow_edge(&g, 6, 5, true, 8);
+     nf->insert_flow_edge(&g, 5, 6, true, 0);
+
+     nf->insert_flow_edge(&g, 6, 10, true, 5);
+     nf->insert_flow_edge(&g, 10, 6, true, 0);
+
+     nf->insert_flow_edge(&g, 6, 3, true, 10);
+     nf->insert_flow_edge(&g, 3, 6, true, 0);
+
+     nf->insert_flow_edge(&g, 7, 6, true, 8);
+     nf->insert_flow_edge(&g, 6, 7, true, 0);
+
+     nf->insert_flow_edge(&g, 7, 11, true, 5);
+     nf->insert_flow_edge(&g, 11, 7, true, 0);
+
+     nf->insert_flow_edge(&g, 7, 12, true, 12);
+     nf->insert_flow_edge(&g, 12, 7, true, 0);
+
+     nf->insert_flow_edge(&g, 8, 7, true, 7);
+     nf->insert_flow_edge(&g, 7, 8, true, 0);
+
+     nf->insert_flow_edge(&g, 8, 12, true, 7);
+     nf->insert_flow_edge(&g, 12, 8, true, 0);
+
+     nf->insert_flow_edge(&g, 9, 6, true, 10);
+     nf->insert_flow_edge(&g, 6, 9, true, 0);
+
+     nf->insert_flow_edge(&g, 9, 13, true, 6);
+     nf->insert_flow_edge(&g, 13, 9, true, 0);
+
+     nf->insert_flow_edge(&g, 10, 9, true, 8);
+     nf->insert_flow_edge(&g, 9, 10, true, 0);
+
+     nf->insert_flow_edge(&g, 10, 7, true, 12);
+     nf->insert_flow_edge(&g, 7, 10, true, 0);
+
+     nf->insert_flow_edge(&g, 10, 13, true, 9);
+     nf->insert_flow_edge(&g, 13, 10, true, 0);
+
+     nf->insert_flow_edge(&g, 11, 10, true, 8);
+     nf->insert_flow_edge(&g, 10, 11, true, 0);
+
+     nf->insert_flow_edge(&g, 11, 13, true, 7);
+     nf->insert_flow_edge(&g, 13, 11, true, 0);
+
+     nf->insert_flow_edge(&g, 12, 11, true, 7);
+     nf->insert_flow_edge(&g, 11, 12, true, 0);
+
+     nf->insert_flow_edge(&g, 12, 13, true, 6);
+     nf->insert_flow_edge(&g, 13, 12, true, 0);
+
+
+     std::cout << "Maximum flow " << nf->netflow(&g, 0, 13);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     int nvertices = ui->lineEdit_number_of_vertices->text().toInt();
     if(nvertices != graph.nvertices)
     {
@@ -143,11 +276,11 @@ void Dialog::on_pushButton_FindFlow_clicked()
 {
     int source, target;
     graph.FindSourceAndTarget(source, target);
-    netflow->netflow(&graph, source, target);
-    print_result();
+    int total = netflow->netflow(&graph, source, target);
+    print_result(total);
 }
 
-void Dialog::print_result()
+void Dialog::print_result(int total)
 {
     EdgeNode *p;
     QString result;
@@ -170,15 +303,8 @@ void Dialog::print_result()
             }
         }
     }
-    int flow = 0;
-    p = graph.edges[1];
-    while (p != NULL)
-    {
-        flow += p->flow;
-        p = p->next;
-    }
     result.append("\n");
     result.append("Total flow = %1\n");
-    result = result.arg(flow);
+    result = result.arg(total);
     ui->plainTextEdit_reslut->setPlainText(result);
 }

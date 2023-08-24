@@ -9,6 +9,7 @@ struct EdgeNode
     int capacity;
     int flow;
     int residual;
+    int rev;
     EdgeNode *next;
 };
 

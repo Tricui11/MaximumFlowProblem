@@ -33,6 +33,6 @@ private:
 
     void DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end);
 
-    void print_result();
+    void print_result(int total);
 };
 #endif // DIALOG_H

@@ -1,40 +1,54 @@
-#include <queue.h>
+#ifndef QUEUE_H
+#define QUEUE_H
+#define QUEUESIZE 1000
+
 #include <stdio.h>
 
-void init_queue(Queue *q)
+struct Queue
 {
-    q->first = 0;
-    q->last = QUEUESIZE-1;
-    q->count = 0;
-}
+    int q[QUEUESIZE+1];
+    int first;
+    int last;
+    int count;
 
-void enqueue(Queue *q, int x)
-{
-    if (q->count >= QUEUESIZE)
+public:
+    void init_queue()
     {
-        printf("Warning: queue overflow enqueue x=%d\n",x);
-    }
-    else
-    {
-        q->last = (q->last+1) % QUEUESIZE;
-        q->q[q->last] = x;
-        q->count = q->count + 1;
-    }
-}
-
-int dequeue(Queue *q)
-{
-    int x = 0;
-    if (q->count <= 0)
-    {
-        printf("Warning: empty queue dequeue.\n");
-    }
-    else
-    {
-        x = q->q[q->first];
-        q->first = (q->first+1) % QUEUESIZE;
-        q->count = q->count - 1;
+        first = 0;
+        last = QUEUESIZE-1;
+        count = 0;
     }
 
-    return(x);
-}
+    void enqueue(int x)
+    {
+        if (count >= QUEUESIZE)
+        {
+            printf("Warning: queue overflow enqueue x=%d\n",x);
+        }
+        else
+        {
+            last = (last+1) % QUEUESIZE;
+            q[last] = x;
+            count++;
+        }
+    }
+
+    int dequeue()
+    {
+        int x = 0;
+        if (count <= 0)
+        {
+            printf("Warning: empty queue dequeue.\n");
+        }
+        else
+        {
+            x = q[first];
+            first = (first+1) % QUEUESIZE;
+            count--;
+        }
+
+        return(x);
+    }
+};
+
+#endif // QUEUE_H
