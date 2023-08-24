@@ -25,8 +25,8 @@
   <widget class="QPushButton" name="pushButton_FindFlow">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>420</y>
+     <x>390</x>
+     <y>600</y>
      <width>251</width>
      <height>51</height>
     </rect>
@@ -50,7 +50,7 @@
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>490</y>
+     <y>540</y>
      <width>410</width>
      <height>33</height>
     </rect>
@@ -136,16 +136,16 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_Weight">
+     <widget class="QLabel" name="label_Capacity">
       <property name="minimumSize">
        <size>
-        <width>65</width>
+        <width>72</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>65</width>
+        <width>72</width>
         <height>16777215</height>
        </size>
       </property>
@@ -156,7 +156,7 @@
        </font>
       </property>
       <property name="text">
-       <string> Weight:</string>
+       <string> Capacity:</string>
       </property>
      </widget>
     </item>
@@ -216,7 +216,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>330</x>
      <y>421</y>
      <width>371</width>
      <height>33</height>
@@ -305,9 +305,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>490</y>
+     <y>420</y>
      <width>251</width>
-     <height>181</height>
+     <height>251</height>
     </rect>
    </property>
    <property name="font">
@@ -316,6 +316,45 @@
     </font>
    </property>
   </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>490</y>
+     <width>214</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <widget class="QRadioButton" name="radioButton_EdmondsKarp">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Edmonds-Karp</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton_Dinic">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Dinic</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <zorder>layoutWidget</zorder>
   <zorder>layoutWidget</zorder>
   <zorder>pushButton_FindFlow</zorder>
   <zorder>layoutWidget</zorder>
