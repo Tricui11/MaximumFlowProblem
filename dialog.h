@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QRegularExpressionValidator>
 #include <flowgraph.cpp>
+#include <circle.cpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -30,9 +31,16 @@ private slots:
 private:
     Ui::Dialog *ui;
     QValidator *cellValidator;
+    QList<Circle> circles;
 
     void DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end);
 
     void print_result(int total);
+
+    void mousePressEvent(QMouseEvent *event);
+
+    void mouseMoveEvent(QMouseEvent *event);
+
+    void mouseReleaseEvent(QMouseEvent *event);
 };
 #endif // DIALOG_H

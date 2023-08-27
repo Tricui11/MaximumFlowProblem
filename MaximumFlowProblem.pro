@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     basenetflow.cpp \
+    circle.cpp \
     dinicnetflow.cpp \
     edgenode.cpp \
     edmondskarpnetflow.cpp \

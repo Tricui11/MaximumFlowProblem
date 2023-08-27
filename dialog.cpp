@@ -51,23 +51,26 @@ void Dialog::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(Qt::black);
     painter.setFont(QFont("times", 22));
+    int xOffset;
     for (int i = 0; i < graph->nvertices; ++i)
     {
         for (int j = i + 1; j < graph->nvertices; ++j)
         {
             if (matrix[i][j] != 0)
             {
-                DrawLineWithArrow(painter, QPoint(graph->vertexCoord[i].x, graph->vertexCoord[i].y), QPoint(graph->vertexCoord[j].x, graph->vertexCoord[j].y));
+                DrawLineWithArrow(painter, QPoint(circles[i].position.x(), circles[i].position.y()), QPoint(circles[j].position.x(), circles[j].position.y()));
             }
             if (matrix[j][i] != 0)
             {
-                DrawLineWithArrow(painter, QPoint(graph->vertexCoord[j].x, graph->vertexCoord[j].y), QPoint(graph->vertexCoord[i].x, graph->vertexCoord[i].y));
+                DrawLineWithArrow(painter, QPoint(circles[j].position.x(), circles[j].position.y()), QPoint(circles[i].position.x(), circles[i].position.y()));
             }
         }
         painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
-        painter.drawEllipse(graph->vertexCoord[i].x - graph->r / 2, graph->vertexCoord[i].y - graph->r / 2, graph->r, graph->r);
+        painter.drawEllipse(circles[i].position.x() - circles[i].radius/2, circles[i].position.y() - circles[i].radius/2, circles[i].radius, circles[i].radius);
         painter.setFont(QFont("times", 22));
-        painter.drawText(graph->vertexCoord[i].x - graph->r / 5, graph->vertexCoord[i].y + graph->r / 5, QString::number(i+1));
+        xOffset = graph->r/5;
+        if (i >= 9) xOffset += graph->r/10;
+        painter.drawText(circles[i].position.x() - xOffset, circles[i].position.y() + graph->r/5, QString::number(i+1));
     }
 }
 
@@ -112,6 +115,11 @@ void Dialog::on_pushButton_draw_vertices_clicked()
         }
         graph->nvertices = nvertices;
         graph->GetCoordsArray();
+    }
+    circles.clear();
+    for (int i = 0; i < graph->nvertices; ++i)
+    {
+        circles.append(Circle(QPointF(graph->vertexCoord[i].x, graph->vertexCoord[i].y), graph->r));
     }
     repaint();
 }
@@ -200,4 +208,39 @@ void Dialog::print_result(int total)
     result.append("Total flow = %1\n");
     result = result.arg(total);
     ui->plainTextEdit_reslut->setPlainText(result);
+}
+
+void Dialog::mousePressEvent(QMouseEvent *event)
+{
+    for (int i = 0; i < circles.size(); ++i)
+    {
+        if (event->button() == Qt::LeftButton &&
+            qPow(event->x() - circles[i].position.x(), 2) + qPow(event->y() - circles[i].position.y(), 2) <= qPow(circles[i].radius / 2, 2))
+        {
+            circles[i].isDragging = true;
+        }
+    }
+}
+
+void Dialog::mouseMoveEvent(QMouseEvent *event)
+{
+    for (int i = 0; i < circles.size(); ++i)
+    {
+        if (circles[i].isDragging)
+        {
+            circles[i].position = event->pos();
+            update();
+        }
+    }
+}
+
+void Dialog::mouseReleaseEvent(QMouseEvent *event)
+{
+    for (int i = 0; i < circles.size(); ++i)
+    {
+        if (event->button() == Qt::LeftButton && circles[i].isDragging)
+        {
+            circles[i].isDragging = false;
+        }
+    }
 }
