@@ -33,9 +33,11 @@ private:
     QValidator *cellValidator;
     QList<Circle> circles;
 
-    void DrawLineWithArrow(QPainter& painter, QPoint start, QPoint end);
+    void drawLineWithArrow(QPainter& painter, QPoint start, QPoint end);
 
-    void print_result(int total);
+    void findSourceAndTarget(int &source, int &target);
+
+    void print_result(int total, FlowGraph* g, bool isPrintPath);
 
     void mousePressEvent(QMouseEvent *event);
 

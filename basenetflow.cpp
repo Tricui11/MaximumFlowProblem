@@ -39,6 +39,8 @@ public:
     virtual int path_volume(FlowGraph *g, int start, int flow, int end, int parents[]) const {}
 
     virtual int netflow(FlowGraph *g, int source, int target) const {}
+
+    virtual ~BaseNetflow() {}
 };
 
 #endif

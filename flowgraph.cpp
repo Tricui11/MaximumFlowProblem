@@ -13,29 +13,16 @@ struct FlowGraph
     int nvertices;
     int* level;
     int nedges;
-    int r = 50;
-    EdgeNode vertexCoord[MAXV];
 
-    FlowGraph(int nvertices, bool isLayered)
+    FlowGraph(int nvertices)
     {
         this->nvertices = nvertices;
-        if (!isLayered)
+        for (int i = 0; i <= nvertices; ++i)
         {
-            for (int i=0; i<MAXV; i++)
-            {
-                degree[i] = 0;
-                edges[i] = NULL;
-            }
+            degree[i] = 0;
+            edges[i] = new EdgeNode[MAXV + 1];
         }
-        else
-        {
-            level = new int[nvertices];
-            for (int i = 0; i <= nvertices; ++i)
-            {
-                edges[i] = new EdgeNode[MAXV + 1];
-                degree[i] = 0;
-            }
-        }
+        level = new int[nvertices];
     }
 
     void GetCoordsArray()
@@ -62,35 +49,9 @@ struct FlowGraph
         }
         for (int i = 0, j = 0; i < nvertices * 2; ++i, ++j)
         {
-            vertexCoord[i].x = coords[j++];
-            vertexCoord[i].y = coords[j];
+            edges[i]->x = coords[j++];
+            edges[i]->y = coords[j];
         }
-    }
-
-    void FindSourceAndTarget(int &source, int &target)
-    {
-        QSet<int> sourceSet;
-        for (int i=1; i<=nvertices; i++)
-        {
-            sourceSet.insert(i);
-        }
-        EdgeNode *p;
-        for (int i=1; i<=nvertices; i++)
-        {
-            p = edges[i];
-            bool isTarget = true;
-            while (p != NULL)
-            {
-                isTarget = false;
-                sourceSet.remove(p->v);
-                p = p->next;
-            }
-            if (isTarget)
-            {
-                target = i;
-            }
-        }
-        source = *(sourceSet.begin());
     }
 };
 
